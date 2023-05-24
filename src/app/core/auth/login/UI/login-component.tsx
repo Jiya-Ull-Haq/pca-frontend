@@ -7,24 +7,24 @@ import { Password } from 'primereact/password';
 import { classNames } from 'primereact/utils';
 import { useContext } from 'react';
 import { PrimeContext } from '../../../../App';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import './login-component.scss';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const LoginComponent = () => {
     const { showToast } = useContext(PrimeContext);
-
+    const navigate = useNavigate();
     interface FormData {
       email: string;
       password: string;
     }
-    
     const onSubmit = (data: FormData) => {
       AuthService.login(data.email, data.password)
         .then((response) => {
           console.log(response);
           if (response) {
             showToast('success', 'Login Successful!', 'Welcome back!');
-            window.location.href = '/dashboard';
+            navigate('/dashboard');
           }
         })
         .catch((error) => {
@@ -73,7 +73,8 @@ export const LoginComponent = () => {
 
                             <Button type="submit" label="Submit" className="mt-2" />
                             <div className="text-center mt-2">
-                                <small>Don't have an account? <a href="/register">Register</a></small>
+                                <small>Don't have an account? <Link to={'/register'}>Register</Link>
+                                </small>
                             </div>
                         </form>
                     )} />

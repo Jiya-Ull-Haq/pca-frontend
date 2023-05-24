@@ -8,17 +8,19 @@ import { Checkbox } from 'primereact/checkbox';
 import { Divider } from 'primereact/divider';
 import { classNames } from 'primereact/utils';
 import { PrimeContext } from '../../../../App';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import './register-component.scss';
+import { Link, useNavigate } from 'react-router-dom';
 
 export const RegisterComponent = () => {
     const { showToast } = useContext(PrimeContext);
+    const navigate = useNavigate();
 
     function successMessage(){
         showToast('success', 'Registered Successfully!', 'Please login to continue.');
     }
     function errorMessage(message: string){
-        showToast('', message)
+        showToast('error', message)
     }
     interface FormData {
         name: string;
@@ -60,7 +62,7 @@ export const RegisterComponent = () => {
         AuthService.register(data.name, data.email, data.password).then((response) => {
             if (response) {
                 successMessage();
-                window.location.href = '/login';
+                navigate('/login');
             }
         }).catch((error) => {
             errorMessage(error.message);
@@ -141,7 +143,7 @@ export const RegisterComponent = () => {
 
                             <Button type="submit" label="Submit" className="mt-2" />
                             <div className="text-center mt-2">
-                                <small>Already have an account? <a href="/login">Login</a></small>
+                                <small>Already have an account? <Link to={'/login'}>Login</Link></small>
                             </div>
                         </form>
                     )} />

@@ -11,6 +11,7 @@ export const AuthService = {
                 'Content-Type': 'application/json'
               }
             });
+            localStorage.setItem('name', response.data.username);
             localStorage.setItem('auth', response.data.access_token);
             return response.data.access_token;
           } catch (error) {

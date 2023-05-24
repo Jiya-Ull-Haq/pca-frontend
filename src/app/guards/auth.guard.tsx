@@ -7,7 +7,6 @@ interface ProtectedRouteProps {
   }
   
   const ProtectedRoute = ({element, fallbackPath}: ProtectedRouteProps) => {
-    debugger
     let authenticated: boolean;
     localStorage.getItem('auth') ? authenticated = true : authenticated = false;
 
