@@ -76,7 +76,9 @@ def login_user(credentials: schemas.UserLogin, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect email or password")
     access_token = create_access_token({"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "username": user.username}
+
+
 
 @router.post("/create-task", response_model=schemas.Task)
 def create_task(task: schemas.TaskCreate, current_user: schemas.User = Depends(get_current_user), db: Session = Depends(get_db)):
