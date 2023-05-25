@@ -1,19 +1,22 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { Dropdown } from 'primereact/dropdown';
 import { Calendar } from 'primereact/calendar';
 import { Button } from 'primereact/button';
 import { TaskCreateService } from '../services/task-create.service';
 import './task-create.component.scss';
 import { InputText } from 'primereact/inputtext';
+import { useNavigate } from 'react-router-dom';
+import { PrimeContext } from '../../../../../App';
 
 export const TaskCreateComponent = () => {
+  const { showToast } = useContext(PrimeContext);
   const [task, setTask] = useState('');
   const [assignee, setAssignee] = useState<any>(null);
   const [priority, setPriority] = useState('');
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [users, setUsers] = useState([]);
   const [invalidDates, setInvalidDates] = useState<Date[]>([]);
-
+  const navigate = useNavigate();
 
   useEffect(() => {
     const today = new Date();
@@ -59,7 +62,11 @@ export const TaskCreateComponent = () => {
         setDate(undefined);
       })
       .catch((error) => {
-        console.log('Error creating task:', error);
+        if (error.message === 'Request failed with status code 403'){
+          localStorage.clear();
+          navigate('/login')
+          showToast('warn', 'Session Expired', 'Please login again');
+        }
       });
   };
 

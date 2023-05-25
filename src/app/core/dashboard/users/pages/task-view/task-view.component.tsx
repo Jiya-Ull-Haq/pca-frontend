@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
-import { Dropdown } from 'primereact/dropdown';
 // import { Paginator } from 'primereact/paginator';
 import './task-view.component.scss'
 import 'primeflex/primeflex.css'; 
 import {TaskViewService} from '../services/task-view.service';
 import { PrimeContext } from '../../../../../App';
+import { useNavigate } from 'react-router-dom';
 
 export const TaskViewComponent = () => {
   const { showToast } = useContext(PrimeContext);
@@ -17,6 +17,7 @@ export const TaskViewComponent = () => {
   const [totalRecords, setTotalRecords] = useState(0);
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
+  const navigate = useNavigate();
   const name = localStorage.getItem('name');
   interface Task {
     task: string;
@@ -45,38 +46,38 @@ export const TaskViewComponent = () => {
       setTotalRecords(response.length);
     } catch (error: any) {
       if (error.message === 'Request failed with status code 403'){
-        localStorage.removeItem('auth');
-        window.location.href = '/login';
-        showToast('warning', 'Session Expired', 'Please login again');
+        localStorage.clear();
+        navigate('/login')
+        showToast('warn', 'Session Expired', 'Please login again');
       }
     }
   };
 
-  const onStatusFilterChange = (e: { value: string }) => {
-    setStatusFilter(e.value);
-    filterTasks(e.value, priorityFilter);
-  };
+  // const onStatusFilterChange = (e: { value: string }) => {
+  //   setStatusFilter(e.value);
+  //   filterTasks(e.value, priorityFilter);
+  // };
 
-  const onPrioritySort = (e: { value: string }) => {
-    setPriorityFilter(e.value);
-    filterTasks(statusFilter, e.value);
-  };
+  // const onPrioritySort = (e: { value: string }) => {
+  //   setPriorityFilter(e.value);
+  //   filterTasks(statusFilter, e.value);
+  // };
 
-  const filterTasks = (status: string, priority: string) => {
-    let filteredData = tasks;
+  // const filterTasks = (status: string, priority: string) => {
+  //   let filteredData = tasks;
 
-    if (status) {
-      filteredData = filteredData.filter((task) => task.status === status);
-    }
+  //   if (status) {
+  //     filteredData = filteredData.filter((task) => task.status === status);
+  //   }
 
-    if (priority) {
-      filteredData = filteredData.filter((task) => task.priority === priority);
-    }
+  //   if (priority) {
+  //     filteredData = filteredData.filter((task) => task.priority === priority);
+  //   }
 
-    setFilteredTasks(filteredData);
-    setTotalRecords(filteredData.length);
-    setFirst(0);
-  };
+  //   setFilteredTasks(filteredData);
+  //   setTotalRecords(filteredData.length);
+  //   setFirst(0);
+  // };
 
   const updateTaskStatus = async (taskId: number, newStatus: string) => {
     try {
