@@ -1,4 +1,5 @@
-import ReactDOM from 'react-dom/client'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
 import './index.scss'
 import 'primereact/resources/themes/lara-light-indigo/theme.css'; 
@@ -7,7 +8,6 @@ import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css'; 
 import PrimeReact, { FilterMatchMode } from 'primereact/api';                      
 import AppRouter from './app/app-routing'
-import React from 'react';
 
 PrimeReact.cssTransition = false;
 PrimeReact.ripple = true;
@@ -28,7 +28,5 @@ PrimeReact.zIndex = {
 PrimeReact.autoZIndex = true;
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
-<React.StrictMode>
     <AppRouter></AppRouter>
-</React.StrictMode>
 )

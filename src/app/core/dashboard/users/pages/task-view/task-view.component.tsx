@@ -35,6 +35,11 @@ export const TaskViewComponent = () => {
   const fetchData = async () => {
     try {
       const response = await TaskViewService.getTasks();
+      response.forEach((task: Task) => {
+        task.due_date = task.due_date.split('T')[0];
+        const dateParts = task.due_date.split('-');
+        task.due_date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
+      });
       setTasks(response);
       setFilteredTasks(response);
       setTotalRecords(response.length);
@@ -118,6 +123,13 @@ export const TaskViewComponent = () => {
         header="Priority"
         sortable
         sortField="priority"
+        ></Column>
+        {/* due date */}
+        <Column
+          field="due_date"
+          header="Due Date"
+          sortable
+          sortField="due_date"
         ></Column>
         <Column
           field="status"

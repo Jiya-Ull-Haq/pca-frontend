@@ -12,8 +12,19 @@ export const TaskCreateComponent = () => {
   const [priority, setPriority] = useState('');
   const [date, setDate] = useState<Date | undefined>(undefined);
   const [users, setUsers] = useState([]);
+  const [invalidDates, setInvalidDates] = useState<Date[]>([]);
+
 
   useEffect(() => {
+    const today = new Date();
+    const invalidDates = [];
+    for (let i = 0; i < today.getDate(); i++) {
+      const invalidDate = new Date();
+      invalidDate.setDate(today.getDate() - i);
+      invalidDates.push(invalidDate);
+    }
+    setInvalidDates(invalidDates);
+    
     TaskCreateService.getUsers()
       .then((data) => {
         setUsers(data);
@@ -21,6 +32,7 @@ export const TaskCreateComponent = () => {
       .catch((error) => {
         console.log('Error fetching users:', error);
       });
+    
   }, []);
 
   const handleTaskChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -50,10 +62,11 @@ export const TaskCreateComponent = () => {
         console.log('Error creating task:', error);
       });
   };
-  
+
+
   return (
     <div className="card" style={{ maxWidth: '1200px', margin: '0 auto' , marginTop: '3rem'}}>
-      <h2>Create Task</h2>
+      <h2>Create Task:</h2>
       <div className='row flex'>
         <div className="p-fluid col-lg-3" style={{flex: 1, marginRight: '3rem'}}> 
           <div className="field">
@@ -98,12 +111,19 @@ export const TaskCreateComponent = () => {
           </div>
         </div>
         <div className='p-fluid col-lg-3' >
-          <Calendar value={date} onChange={(e) => setDate(e.value as Date)} inline showWeek />
+        <Calendar
+        value={date}
+        onChange={(e) => setDate(e.value as Date)}
+        inline
+        disabledDates={invalidDates}
+      />
         </div>
       </div>
       <div className="p-fluid field">
           <Button label="Submit" onClick={handleSubmit} className='mt-5'/>
       </div>
     </div>
+    
   );
+  
 };
