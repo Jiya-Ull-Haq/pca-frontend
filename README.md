@@ -24,10 +24,13 @@ The objective of this assignment is to demonstrate my proficiency as a full-stac
 
 ## ScreenShots of the Application
 
-<img width="1602" alt="Screenshot 2023-05-25 at 10 16 35 AM" src="https://github.com/Jiya-Ull-Haq/powercred-assignment/assets/60106386/1e517e93-8043-47b5-bdbf-10cc4a6c76b1">
+<!-- get picture from pictures/Login -->
+<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/Login.png">
 
-<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="https://github.com/Jiya-Ull-Haq/powercred-assignment/assets/60106386/ad04c2d7-caa1-45e7-8143-dea47aad6670">
+<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/Register.png">
 
-<img width="1602" alt="Screenshot 2023-05-25 at 5 29 56 PM" src="https://github.com/Jiya-Ull-Haq/powercred-assignment/assets/60106386/8d324b87-ffce-411f-a0a3-c698c5980f33">
+<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/Register2.png">
 
-<img width="1597" alt="Screenshot 2023-05-25 at 10 17 04 AM" src="https://github.com/Jiya-Ull-Haq/powercred-assignment/assets/60106386/d53a876c-427d-4ceb-b511-d527312ad254">
+<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/create.png">
+
+<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/view.png">
