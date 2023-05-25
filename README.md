@@ -24,13 +24,13 @@ The objective of this assignment is to demonstrate my proficiency as a full-stac
 
 ## ScreenShots of the Application
 
-<!-- get picture from pictures/Login -->
+
 <img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/Login.png">
 
 <img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/Register.png">
 
 <img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/Register2.png">
 
-<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/create.png">
-
 <img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/view.png">
+
+<img width="1600" alt="Screenshot 2023-05-25 at 10 16 20 AM" src="./pictures/create.png">
