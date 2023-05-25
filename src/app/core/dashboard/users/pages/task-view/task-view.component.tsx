@@ -124,7 +124,6 @@ export const TaskViewComponent = () => {
         sortable
         sortField="priority"
         ></Column>
-        {/* due date */}
         <Column
           field="due_date"
           header="Due Date"
@@ -135,18 +134,39 @@ export const TaskViewComponent = () => {
           field="status"
           header="Status"
           body={renderStatusDropdown}
-          filter
-          filterElement={
-            <Dropdown
-              value={statusFilter}
-              options={[
-                { label: 'All', value: '' },
-                { label: 'Pending', value: 'Pending' },
-                { label: 'Completed', value: 'Completed' },
-              ]}
-              onChange={onStatusFilterChange}
-            />
-          }
+          showFilterMatchModes={false}
+          sortable
+          showFilterMenuOptions={false}
+          showClearButton={false}
+          // filter
+          // filterElement={
+          //   <Dropdown
+            
+          //     value={statusFilter}
+          //     options={[
+          //       { label: 'All', value: '' },
+          //       { label: 'Pending', value: 'Pending' },
+          //       { label: 'Completed', value: 'Completed' },
+          //     ]}
+          //     onChange={onStatusFilterChange}
+          //   />
+          // }
+        ></Column>
+        <Column
+          header="Delete"
+          body={(rowData) => (
+            <button
+              className="p-button-danger text-white"
+              onClick={() => {
+                setFilteredTasks(
+                  filteredTasks.filter((task) => task.id !== rowData.id)
+                )
+                TaskViewService.deleteTask(rowData.id);
+              }}
+            >
+              Delete
+            </button>
+          )}
         ></Column>
             </DataTable>
     </div>

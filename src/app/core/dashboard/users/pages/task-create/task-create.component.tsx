@@ -24,7 +24,7 @@ export const TaskCreateComponent = () => {
       invalidDates.push(invalidDate);
     }
     setInvalidDates(invalidDates);
-    
+
     TaskCreateService.getUsers()
       .then((data) => {
         setUsers(data);
@@ -71,7 +71,7 @@ export const TaskCreateComponent = () => {
         <div className="p-fluid col-lg-3" style={{flex: 1, marginRight: '3rem'}}> 
           <div className="field">
             <label htmlFor="task">Task</label>
-            <InputText id="task" type="text" value={task} onChange={handleTaskChange} />
+            <InputText id="task" type="text" value={task} onChange={handleTaskChange} placeholder="Enter a task"/>
           </div>
 
           <div className="field">
@@ -113,7 +113,9 @@ export const TaskCreateComponent = () => {
         <div className='p-fluid col-lg-3' >
         <Calendar
         value={date}
-        onChange={(e) => setDate(e.value as Date)}
+        onChange={(e) => {
+          setDate(e.value as Date);
+        }}
         inline
         disabledDates={invalidDates}
       />

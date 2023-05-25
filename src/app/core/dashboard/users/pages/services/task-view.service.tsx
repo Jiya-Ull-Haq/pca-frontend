@@ -32,5 +32,20 @@ export const TaskViewService = {
     } catch (error) {
       console.log("Error updating task:", error);
     }
+  },
+
+  deleteTask: async (id: number) => {
+    try{
+      const token = localStorage.getItem("auth");
+      const response = await axios.delete(`${API_URL}/delete-task/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.log("Error deleting task:", error);
+    }
   }
 };
