@@ -26,6 +26,7 @@ export const TaskCreateComponent = () => {
       invalidDate.setDate(today.getDate() - i);
       invalidDates.push(invalidDate);
     }
+
     setInvalidDates(invalidDates);
 
     TaskCreateService.getUsers()
@@ -51,11 +52,11 @@ export const TaskCreateComponent = () => {
   };
 
   const handleSubmit = () => {
-    const formattedDate = date ? date.toISOString() : '';
 
+    const formattedDate = date ? date.toISOString() : '';
     TaskCreateService.createTask(task, assignee, priority, formattedDate)
       .then((data) => {
-        console.log('Task created successfully:', data);
+        showToast('success', 'Task Created', 'Task created successfully');
         setTask('');
         setAssignee(null);
         setPriority('');
@@ -68,6 +69,7 @@ export const TaskCreateComponent = () => {
           showToast('warn', 'Session Expired', 'Please login again');
         }
       });
+
   };
 
 
@@ -110,7 +112,6 @@ export const TaskCreateComponent = () => {
                 { label: 'High', value: 'high' },
                 { label: 'Medium', value: 'medium' },
                 { label: 'Low', value: 'low' }
-                
               ]}
               onChange={handlePriorityChange}
               placeholder="Select Priority"
@@ -121,7 +122,8 @@ export const TaskCreateComponent = () => {
         <Calendar
         value={date}
         onChange={(e) => {
-          setDate(e.value as Date);
+          let date = new Date(e.value as Date);
+          date.setDate(date.getDate() + 1);
         }}
         inline
         disabledDates={invalidDates}

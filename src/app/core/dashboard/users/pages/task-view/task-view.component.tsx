@@ -10,10 +10,11 @@ import { useNavigate } from 'react-router-dom';
 
 export const TaskViewComponent = () => {
   const { showToast } = useContext(PrimeContext);
-  const [tasks, setTasks] = useState<Task[]>([]);
   const [filteredTasks, setFilteredTasks] = useState<Task[]>([]);
-  const [priorityFilter, setPriorityFilter] = useState('');
-  const [statusFilter, setStatusFilter] = useState('');
+
+  // const [priorityFilter, setPriorityFilter] = useState('');
+  // const [statusFilter, setStatusFilter] = useState('');
+
   const [totalRecords, setTotalRecords] = useState(0);
   const [first, setFirst] = useState(0);
   const [rows, setRows] = useState(10);
@@ -41,7 +42,6 @@ export const TaskViewComponent = () => {
         const dateParts = task.due_date.split('-');
         task.due_date = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}`;
       });
-      setTasks(response);
       setFilteredTasks(response);
       setTotalRecords(response.length);
     } catch (error: any) {
@@ -89,12 +89,14 @@ export const TaskViewComponent = () => {
   };
 
   const renderStatusDropdown = (rowData: { id: any; status: string | number | readonly string[] | undefined; }) => {
-    const handleStatusChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const handleStatusChange = (e: any) => {
         updateTaskStatus(rowData.id, e.target.value);
     };
 
     return (
-      <select value={rowData.status} onChange={handleStatusChange}>
+      <select value={rowData.status} onChange={handleStatusChange}
+      style={{backgroundColor: 'white', color: 'black', border: '1px solid #ced4da', borderRadius: '.25rem', padding: '.375rem .75rem', lineHeight: '1.5', width: '100%'}}
+      >
         <option value="Pending">Pending</option>
         <option value="Completed">Completed</option>
       </select>
@@ -135,8 +137,8 @@ export const TaskViewComponent = () => {
           field="status"
           header="Status"
           body={renderStatusDropdown}
-          showFilterMatchModes={false}
           sortable
+          showFilterMatchModes={false}
           showFilterMenuOptions={false}
           showClearButton={false}
           // filter
